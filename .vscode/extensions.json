@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "ms-dotnettools.csharp",
+    "logerfo.sln-support",
+    "redhat.vscode-xml",
+    "esbenp.prettier-vscode"
+  ]
+}
