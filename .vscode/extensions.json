@@ -3,6 +3,7 @@
     "ms-dotnettools.csharp",
     "logerfo.sln-support",
     "redhat.vscode-xml",
-    "esbenp.prettier-vscode"
+    "esbenp.prettier-vscode",
+    "ms-azuretools.vscode-docker"
   ]
 }

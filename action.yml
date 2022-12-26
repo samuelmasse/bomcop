@@ -1,0 +1,8 @@
+﻿name: "bomcop"
+description: "A tool to verify all your files contain an UTF-8 BOM"
+branding:
+  icon: activity
+  color: orange
+runs:
+  using: "docker"
+  image: "Dockerfile"
