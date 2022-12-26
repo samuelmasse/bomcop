@@ -1,22 +1,26 @@
 ﻿using System.Diagnostics;
+using Microsoft.Extensions.FileSystemGlobbing;
 
 namespace Bomcop
 {
     public class Tool
     {
         private readonly string dir;
+        private readonly string[] excludes;
 
-        public Tool(string dir)
+        public Tool(string dir, string[] excludes)
         {
             this.dir = dir;
+            this.excludes = excludes;
         }
 
         public bool Run()
         {
             var files = GetFiles();
+            var filtered = FilterFiles(files);
             int invalid = 0;
 
-            foreach (var file in files)
+            foreach (var file in filtered)
             {
                 if (!CheckBomOnFile(file))
                     invalid++;
@@ -28,7 +32,7 @@ namespace Bomcop
                 Print($"{invalid} bom missing", ConsoleColor.Red);
             }
 
-            return invalid != 0;
+            return invalid == 0;
         }
 
         private string[] GetFiles()
@@ -37,7 +41,7 @@ namespace Bomcop
             var output = GetProcOutput(proc);
 
             if (proc.ExitCode == 0)
-                return ResolvePaths(GetLines(output));
+                return GetLines(output);
             else return ListFilesRecursively(dir);
         }
         private Process RunGitListFiles()
@@ -66,40 +70,48 @@ namespace Bomcop
         }
         private string[] GetLines(string output)
         {
+            HashSet<string> dupes = new();
             List<string> lines = new();
 
             using StringReader sr = new(output);
             string? line;
 
             while ((line = sr.ReadLine()) != null)
-                lines.Add(line);
+            {
+                if (!dupes.Contains(line))
+                {
+                    lines.Add(line);
+                    dupes.Add(line);
+                }
+            }
 
             return lines.ToArray();
         }
-        private string[] ResolvePaths(string[] lines)
-        {
-            foreach (ref var line in new Span<string>(lines))
-                line = Path.Join(dir, line);
-
-            return lines;
-        }
         private string[] ListFilesRecursively(string dir)
         {
-            return Directory.GetFiles(dir, "*.*", SearchOption.AllDirectories);
+            return Directory.GetFiles(dir, "*.*", SearchOption.AllDirectories)
+                .Select(x => Path.GetRelativePath(dir, x).Replace('\\', '/'))
+                .ToArray();
+        }
+
+        private string[] FilterFiles(string[] files)
+        {
+            var matcher = new Matcher();
+            matcher.AddInclude("**");
+            matcher.AddExcludePatterns(excludes);
+            return matcher.Match(files).Files.Select(x => x.Path).ToArray();
         }
 
         private bool CheckBomOnFile(string file)
         {
-            using var fs = File.OpenRead(file);
+            using var fs = File.OpenRead(Path.Join(dir, file));
 
             Span<byte> bom = stackalloc byte[3];
             fs.Read(bom);
 
             if (bom[0] != 0xef || bom[1] != 0xbb || bom[2] != 0xbf)
             {
-                string path = Path.GetRelativePath(dir, file);
-
-                Print($"{path}:", ConsoleColor.Yellow);
+                Print($"{file}:", ConsoleColor.Yellow);
                 Print($"    UTF-8 BOM missing at start of file", ConsoleColor.Red);
 
                 return false;

@@ -24,7 +24,11 @@ namespace Bomcop
                 return false;
             }
 
-            return new Tool(dir ?? Directory.GetCurrentDirectory()).Run();
+            var excludes = new List<string>(Excludes.Default);
+            if (result.Value?.Exclude is not null)
+                excludes.AddRange(result.Value.Exclude);
+
+            return new Tool(dir ?? Directory.GetCurrentDirectory(), excludes.ToArray()).Run();
         }
     }
 }

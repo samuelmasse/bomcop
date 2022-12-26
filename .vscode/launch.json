@@ -8,8 +8,7 @@
       "preLaunchTask": "build",
       "program": "${workspaceFolder}/Bomcop/bin/Debug/net6.0/win-x64/bomcop.dll",
       "args": [],
-      "cwd": "${workspaceFolder}/Bomcop/bin/Debug/net6.0/win-x64",
-      "console": "externalTerminal",
+      "console": "integratedTerminal",
       "stopAtEntry": false
     }
   ]
