@@ -14,5 +14,6 @@ LABEL com.github.actions.icon="activity"
 LABEL com.github.actions.color="orange"
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0
+WORKDIR /
 COPY --from=build-env /app/out .
 ENTRYPOINT [ "dotnet", "/bomcop.dll" ]
