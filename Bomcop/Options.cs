@@ -9,5 +9,8 @@ namespace Bomcop
 
         [Option]
         public IEnumerable<string>? Exclude { get; set; }
+
+        [Option("no-color")]
+        public bool NoColor { get; set; }
     }
 }

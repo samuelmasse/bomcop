@@ -7,11 +7,13 @@ namespace Bomcop
     {
         private readonly string dir;
         private readonly string[] excludes;
+        private readonly bool colored;
 
-        public Tool(string dir, string[] excludes)
+        public Tool(string dir, string[] excludes, bool colored)
         {
             this.dir = dir;
             this.excludes = excludes;
+            this.colored = colored;
         }
 
         public bool Run()
@@ -122,9 +124,11 @@ namespace Bomcop
         private void Print(string str, ConsoleColor color)
         {
             var prev = Console.ForegroundColor;
-            Console.ForegroundColor = color;
+            if (colored)
+                Console.ForegroundColor = color;
             Console.WriteLine(str);
-            Console.ForegroundColor = prev;
+            if (colored)
+                Console.ForegroundColor = prev;
         }
     }
 }

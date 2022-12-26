@@ -13,22 +13,48 @@ namespace Bomcop
 
         public bool Run()
         {
-            var result = Parser.Default.ParseArguments<Options>(args);
-            if (result.Errors.Any())
+            var options = Parse();
+            if (options is null)
                 return false;
 
-            string? dir = result.Value?.Dir;
-            if (dir is not null && !Directory.Exists(dir))
+            var dir = GetDirectory(options);
+            if (dir is null)
+                return false;
+
+            return new Tool(dir, GetExcludes(options), GetColored(options)).Run();
+        }
+
+        private Options? Parse()
+        {
+            return Parser.Default.ParseArguments<Options>(args).Value;
+        }
+
+        private string? GetDirectory(Options options)
+        {
+            string dir = options.Dir ?? Directory.GetCurrentDirectory();
+
+            if (!Directory.Exists(dir))
             {
                 Console.WriteLine($"Directory does not exist : {dir}");
-                return false;
+                return null;
             }
 
-            var excludes = new List<string>(Excludes.Default);
-            if (result.Value?.Exclude is not null)
-                excludes.AddRange(result.Value.Exclude);
+            return dir;
+        }
 
-            return new Tool(dir ?? Directory.GetCurrentDirectory(), excludes.ToArray()).Run();
+        private string[] GetExcludes(Options options)
+        {
+            var excludes = new List<string>(Excludes.Default);
+            if (options.Exclude is not null)
+                excludes.AddRange(options.Exclude);
+
+            return excludes.ToArray();
+        }
+
+        private bool GetColored(Options options)
+        {
+            var envNoColor = Environment.GetEnvironmentVariable("NO_COLOR");
+            return !options.NoColor && envNoColor is null;
         }
     }
 }
