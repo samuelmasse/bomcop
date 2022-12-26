@@ -13,4 +13,4 @@ jobs:
         with:
           fetch-depth: 0
       - name: Run bomcop
-        uses: https://github.com/samuelmasse/bomcop@master
+        uses: samuelmasse/bomcop@master
