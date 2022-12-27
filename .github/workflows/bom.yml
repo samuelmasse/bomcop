@@ -1,5 +1,4 @@
-﻿---
-name: Run bomcop
+﻿name: Run bomcop
 on:
   push:
   pull_request:
