@@ -1,8 +1,16 @@
-﻿name: "bomcop"
-description: "A tool to verify all your files contain an UTF-8 BOM"
+﻿name: bomcop
+description: A tool to verify all your files contain an UTF-8 BOM
 branding:
   icon: activity
   color: orange
+inputs:
+  exclude:
+    description: List of file regex patterns to be excluded
+    required: false
+    default: "?"
 runs:
-  using: "docker"
-  image: "Dockerfile"
+  using: docker
+  image: Dockerfile
+  args:
+    - "--exclude"
+    - ${{ inputs.exclude }}
