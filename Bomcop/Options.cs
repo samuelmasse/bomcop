@@ -7,10 +7,10 @@ namespace Bomcop
         [Value(0, HelpText = "Directory to check for BOM", MetaName = "dir")]
         public string? Dir { get; set; }
 
-        [Option]
+        [Option(HelpText = "List of file regex patterns to be excluded")]
         public IEnumerable<string>? Exclude { get; set; }
 
-        [Option("no-color")]
+        [Option("no-color", HelpText = "Turn off colors for output")]
         public bool NoColor { get; set; }
     }
 }
