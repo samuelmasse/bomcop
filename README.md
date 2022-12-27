@@ -36,7 +36,7 @@ Copyright (C) 2022 bomcop
 
 These file patterns are excluded by default from the search. If the directory is in a git repo, files ignored by `.gitignore` will also be ignored by this tool.
 
-```
+```text
 **/.vscode/*.json
 **/*.dll
 **/*.snap
@@ -69,7 +69,7 @@ These file patterns are excluded by default from the search. If the directory is
 You can add more using the `--exclude` option
 
 ```console
-$ bomcop --exclude **/package-lock.json **/yarn.lock
+bomcop --exclude **/package-lock.json **/yarn.lock
 ```
 
 ## Github Action
