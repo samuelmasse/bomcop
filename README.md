@@ -68,7 +68,7 @@ These file patterns are excluded by default from the search. If the directory is
 
 You can add more using the `--exclude` option
 
-```console
+```text
 bomcop --exclude **/package-lock.json **/yarn.lock
 ```
 
