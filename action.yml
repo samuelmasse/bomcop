@@ -1,11 +1,11 @@
 ﻿name: bomcop
-description: A tool to verify all your files contain an UTF-8 BOM
+description: "A tool to verify that all your files contain a UTF-8 BOM"
 branding:
   icon: activity
   color: orange
 inputs:
   exclude:
-    description: List of file regex patterns to be excluded
+    description: "List of file regex patterns to be excluded"
     required: false
     default: "?"
 runs:

@@ -9,7 +9,7 @@ LABEL repository="https://github.com/samuelmasse/bomcop"
 LABEL homepage="https://github.com/samuelmasse/bomcop"
 
 LABEL com.github.actions.name="Bomcop"
-LABEL com.github.actions.description="A tool to verify all your files contain an UTF-8 BOM"
+LABEL com.github.actions.description="A tool to verify that all your files contain a UTF-8 BOM"
 LABEL com.github.actions.icon="activity"
 LABEL com.github.actions.color="orange"
 
