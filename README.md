@@ -6,7 +6,7 @@ This is simple tool you can run on a directory that will recursively find all fi
 
 Running bomcop from command line on this repo will reveal that `action.yml` is not encoded with a UTF-8 BOM
 
-```
+```console
 $ bomcop
 action.yml:
     UTF-8 BOM missing at start of file
@@ -16,7 +16,7 @@ action.yml:
 
 ## Usage
 
-```
+```console
 $ bomcop --help
 bomcop 1.0.0
 Copyright (C) 2022 bomcop
@@ -68,8 +68,8 @@ These file patterns are excluded by default from the search. If the directory is
 
 You can add more using the `--exclude` option
 
-```
-bomcop --exclude **/package-lock.json **/yarn.lock
+```console
+$ bomcop --exclude **/package-lock.json **/yarn.lock
 ```
 
 ## Github Action
