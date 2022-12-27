@@ -1,4 +1,4 @@
-namespace Bomcop
+﻿namespace Bomcop
 {
     public static class Excludes
     {
