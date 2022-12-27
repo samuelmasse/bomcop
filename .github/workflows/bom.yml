@@ -14,4 +14,4 @@ jobs:
       - name: Run bomcop
         uses: samuelmasse/bomcop@master
         with:
-          exclude: '"action.yml" "LICENSE"'
+          exclude: "action.yml"
