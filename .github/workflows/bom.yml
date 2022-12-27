@@ -14,3 +14,5 @@ jobs:
           fetch-depth: 0
       - name: Run bomcop
         uses: samuelmasse/bomcop@master
+        with:
+          exclude: "action.yml"
