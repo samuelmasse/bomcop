@@ -91,7 +91,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Run bomcop
-        uses: samuelmasse/bomcop@master
+        uses: samuelmasse/bomcop@v1.0.0
         with:
           # exclude: "any file patterns you want to exclude"
 ```
