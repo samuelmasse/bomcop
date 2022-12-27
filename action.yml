@@ -1,4 +1,5 @@
-﻿name: bomcop
+---
+name: bomcop
 description: "A tool to verify that all your files contain a UTF-8 BOM"
 branding:
   icon: activity
