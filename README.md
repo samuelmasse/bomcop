@@ -37,6 +37,7 @@ Copyright (C) 2022 bomcop
 These file patterns are excluded by default from the search. If the directory is in a git repo, files ignored by `.gitignore` will also be ignored by this tool.
 
 ```text
+**/.git/**
 **/.vscode/*.json
 **/*.dll
 **/*.snap

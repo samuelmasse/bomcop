@@ -4,6 +4,7 @@
     {
         public static readonly string[] Default = new string[]
         {
+            "**/.git/**",
             "**/.vscode/*.json",
             "**/*.dll",
             "**/*.snap",
